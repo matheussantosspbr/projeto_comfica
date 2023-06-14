@@ -23,3 +23,5 @@ Route::post('/add_book', [App\Http\Controllers\HomeController::class, 'addBook']
 
 //API para favorita e remover dos favoritos
 Route::post('/favorite', [App\Http\Controllers\HomeController::class, 'favoriteBook']);
+
+Route::post('/favoritos', [App\Http\Controllers\HomeController::class, 'favoritos']);

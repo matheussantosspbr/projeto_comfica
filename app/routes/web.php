@@ -14,6 +14,3 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index']);
-
-Route::post('/favoritos', [App\Http\Controllers\HomeController::class, 'favoritos']);
-

@@ -29,19 +29,7 @@ class Books extends Model
     }
 
     public static function selectFavorites(){
-        return DB::select('SELECT
-                        *
-                    FROM
-                        books
-                    WHERE
-                        favorite = 1
-                    UNION
-                    SELECT
-                        *
-                    FROM
-                        books
-                    WHERE
-                        favorite = 0;');
+        return DB::select('SELECT * FROM comfica.books order by favorite DESC');
     }
 
     

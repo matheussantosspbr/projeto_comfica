@@ -434,7 +434,7 @@
                         <figure
                             style="background-image: url(' {{ $book->url }}');background-size: cover; background-repeat: none; ">
                             @if ($book->favorite == 0)
-                                <svg onclick="alertRemoverFavoritar(1, {{ $book->id }}, '{{ $book->title }}')"
+                                <svg onclick="favoriteBook(1, {{ $book->id }})"
                                     class="favorite-status"
                                     style="fill:#ff3c3c;fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"
                                     version="1.1" viewBox="0 0 32 32" width="100%" xml:space="preserve"
@@ -446,7 +446,7 @@
                                     </g>
                                 </svg>
                             @else
-                                <svg onclick="alertRemoverFavoritar(0,{{ $book->id }}, '{{ $book->title }}')"
+                                <svg onclick="favoriteBook(0,{{ $book->id }})"
                                     class="favorite-status" enable-background="new 0 0 12 12" id="Слой_1"
                                     version="1.1" viewBox="0 0 12 12" xml:space="preserve"
                                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -539,20 +539,6 @@
             });
         });
 
-        function alertRemoverFavoritar(status, id, title) {
-            if (status == 0) {
-                $('#rmFavoriteTitle').val(title)
-                $('#rmFavoriteID').val(id)
-                document.querySelector('body').classList.add('rmBookShow')
-            } else {
-                favoriteBook(status, id)
-            }
-        }
-
-        function confirmarRMFavorite() {
-            favoriteBook(0, $('#rmFavoriteID').val())
-        }
-
         function favoriteBook(status, id) {
             $.ajax({
                 type: 'POST',
@@ -580,7 +566,7 @@
                 document.querySelector('section').classList.add('filtrado')
                 $.ajax({
                     type: 'POST',
-                    url: '/favoritos',
+                    url: '/api/favoritos',
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
@@ -592,7 +578,7 @@
 
                             if (item.favorite == 0) {
                                 svg = `
-                            <svg onclick="alertRemoverFavoritar(1, ${ item.id }, '${item.title }')"
+                            <svg onclick="favoriteBook(1, ${ item.id })"
                                     class="favorite-status"
                                     style="fill:#ff3c3c;fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"
                                     version="1.1" viewBox="0 0 32 32" width="100%" xml:space="preserve"
@@ -606,7 +592,7 @@
                             `
                             } else {
                                 svg = `
-                            <svg onclick="alertRemoverFavoritar(0,${item.id }, '${item.title}')"
+                            <svg onclick="favoriteBook(0,${item.id })"
                                     class="favorite-status" enable-background="new 0 0 12 12" id="Слой_1"
                                     version="1.1" viewBox="0 0 12 12" xml:space="preserve"
                                     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -680,6 +666,21 @@
             }
 
         });
+
+        // Remover cards
+        function alertRemoverFavoritar(status, id, title) {
+            if (status == 0) {
+                $('#rmFavoriteTitle').val(title)
+                $('#rmFavoriteID').val(id)
+                document.querySelector('body').classList.add('rmBookShow')
+            } else {
+                favoriteBook(status, id)
+            }
+        }
+
+        function confirmarRMFavorite() {
+            favoriteBook(0, $('#rmFavoriteID').val())
+        }
     </script>
 </body>
 
