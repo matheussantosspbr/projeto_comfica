@@ -17,6 +17,10 @@ class HomeController extends Controller
         return view('home', ['books' => Books::all()]);
     }
 
+    public function favoritos(){
+        return Books::selectFavorites();
+    }
+
     public function addBook(Request $request)
     {
         return Books::addBook($request);

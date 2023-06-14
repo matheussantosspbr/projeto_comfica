@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Laravel</title>
+    <title>Comfica</title>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.bunny.net">
@@ -163,10 +163,9 @@
             justify-content: flex-start
         }
 
-        .dividerBook svg{
+        .dividerBook svg {
             width: 3rem;
             rotate: -90deg
-
         }
 
         .descriptionBook {
@@ -460,7 +459,7 @@
                         <div class="dividerBook">
                             <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
                                 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                viewBox="0 10 46 46"  xml:space="preserve">
+                                viewBox="0 10 46 46" xml:space="preserve">
                                 <g>
                                     <polygon style="fill:#030104;" points="46,3.004 0,3 23.002,43 	" />
                                 </g>
@@ -504,15 +503,15 @@
                     </div>
                 @endforeach
 
-                <button id="showModalAddBook">Adicionar</button>
+                <button onclick="showModalAddBook()" id="showModalAddBook">Adicionar</button>
             </section>
         </div>
     </main>
 
     <script>
-        document.querySelector('#showModalAddBook').addEventListener('click', function() {
+        function showModalAddBook(){
             document.querySelector('body').classList.add('addBookShow')
-        })
+        }
 
         function fecharModal(modal) {
             document.querySelector('body').classList.remove(modal)
@@ -573,6 +572,114 @@
                 }
             });
         }
+
+        $('#favoritos button').click(function(e) {
+            e.preventDefault();
+
+            if (document.querySelector('section').classList[0] == undefined) {
+                document.querySelector('section').classList.add('filtrado')
+                $.ajax({
+                    type: 'POST',
+                    url: '/favoritos',
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    data: {},
+                    success: function(data) {
+                        let books = data.map(function(item) {
+
+                            let svg = ``
+
+                            if (item.favorite == 0) {
+                                svg = `
+                            <svg onclick="alertRemoverFavoritar(1, ${ item.id }, '${item.title }')"
+                                    class="favorite-status"
+                                    style="fill:#ff3c3c;fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"
+                                    version="1.1" viewBox="0 0 32 32" width="100%" xml:space="preserve"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:serif="http://www.serif.com/"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <g id="Icon">
+                                        <path
+                                            d="M16.004,6.576c-2.941,-2.289 -7.202,-2.083 -9.905,0.619c-2.927,2.927 -2.927,7.68 -0,10.607c-0,0 9.192,9.192 9.192,9.192c0.391,0.391 1.024,0.391 1.415,0l9.192,-9.192c2.927,-2.927 2.927,-7.68 -0,-10.607c-2.69,-2.69 -6.951,-2.88 -9.894,-0.619Zm-0.004,2.328c-0,-0 -0,-0 0,-0c0.438,-0.008 0.667,-0.258 0.703,-0.289c2.355,-2.05 5.641,-2.145 7.781,-0.005c2.146,2.146 2.146,5.631 -0,7.778c-0,-0 -8.486,8.485 -8.486,8.485c0,0 -8.485,-8.485 -8.485,-8.485c-2.146,-2.147 -2.146,-5.632 0,-7.778c2.147,-2.147 5.633,-2.146 7.78,0.001c0.187,0.187 0.442,0.293 0.707,0.293Z" />
+                                    </g>
+                                </svg>
+                            `
+                            } else {
+                                svg = `
+                            <svg onclick="alertRemoverFavoritar(0,${item.id }, '${item.title}')"
+                                    class="favorite-status" enable-background="new 0 0 12 12" id="Слой_1"
+                                    version="1.1" viewBox="0 0 12 12" xml:space="preserve"
+                                    xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <path
+                                        d="M8.5,1C7.5206299,1,6.6352539,1.4022217,6,2.0504761C5.3648071,1.4022827,4.4793701,1,3.5,1  C1.5670166,1,0,2.5670166,0,4.5S2,8,6,11c4-3,6-4.5670166,6-6.5S10.4329834,1,8.5,1z"
+                                        fill="#ff3c3c" />
+                                </svg>
+                            `
+                            }
+
+                            return `<div class="book">
+                            <figure
+                                style="background-image: url(' ${item.url}');background-size: cover; background-repeat: none; ">
+                                ${svg}
+                            </figure>
+                            <div class="dividerBook">
+                                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                    viewBox="0 10 46 46" xml:space="preserve">
+                                    <g>
+                                        <polygon style="fill:#030104;" points="46,3.004 0,3 23.002,43 	" />
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                    <g>
+                                    </g>
+                                </svg>
+
+                            </div>
+                            <div class="descriptionBook">
+                                <h3>${ item.title }</h3>
+                                <p>${ item.description }</p>
+                            </div>
+                            </div>`;
+                        });
+
+                        document.querySelector('section').innerHTML = books + '<button onclick="showModalAddBook()" id="showModalAddBook">Adicionar</button>'
+                    },
+                    error: function(err) {
+                        console.log(err);
+                    }
+                });
+            }else{
+                window.location.reload();
+            }
+
+        });
     </script>
 </body>
 

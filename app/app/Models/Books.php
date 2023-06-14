@@ -18,11 +18,30 @@ class Books extends Model
     ];
 
     public static function addBook($dados){
-        return DB::insert('insert into books (title, description, url) values (?, ?, ?)', [$dados->title, $dados->description, $dados->url]);
+        return DB::insert(' INSERT INTO books
+                                (title, description, url)
+                            VALUES 
+                                (?, ?, ?)', [$dados->title, $dados->description, $dados->url]);
     }
 
     public static function favoriteBook($dados){
         Books::where('id', $dados->id)->update(['favorite' => $dados->status]);
+    }
+
+    public static function selectFavorites(){
+        return DB::select('SELECT
+                        *
+                    FROM
+                        books
+                    WHERE
+                        favorite = 1
+                    UNION
+                    SELECT
+                        *
+                    FROM
+                        books
+                    WHERE
+                        favorite = 0;');
     }
 
     
