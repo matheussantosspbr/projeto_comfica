@@ -5,7 +5,7 @@ git clone https://github.com/matheussantosspbr/projeto_comfica
 cd projeto_comfica/app
 
 Renomeei (.env.example) para (.env):
-    <!--  -->
+    <!-- COmo renomear no terminal -->
         Linux:
             mv .env.example .env
         Windowns:
