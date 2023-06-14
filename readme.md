@@ -32,4 +32,4 @@ Caso a opção 1 não funcione, use a opção 2:
 
 Acessar http://localhost/
     
-Para sair da maquina virtual (docker) aperte exit.
+Para sair da maquina virtual (docker) escreva exit.
