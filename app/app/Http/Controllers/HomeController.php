@@ -25,6 +25,11 @@ class HomeController extends Controller
     {
         return Books::addBook($request);
     }
+    
+    public function removeBook(Request $request)
+    {
+        return Books::removeBook($request);
+    }
 
     public function favoriteBook(Request $request)
     {

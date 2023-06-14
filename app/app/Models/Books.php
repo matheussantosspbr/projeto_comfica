@@ -32,5 +32,9 @@ class Books extends Model
         return DB::select('SELECT * FROM comfica.books order by favorite DESC');
     }
 
+    public static function removeBook($dados){
+        return Books::where('id', $dados->id)->delete();
+    }
+
     
 }

@@ -21,7 +21,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //API para criar book
 Route::post('/add_book', [App\Http\Controllers\HomeController::class, 'addBook']);
 
+//API para deletar book
+Route::post('/remove_book', [App\Http\Controllers\HomeController::class, 'removeBook']);
+
 //API para favorita e remover dos favoritos
 Route::post('/favorite', [App\Http\Controllers\HomeController::class, 'favoriteBook']);
 
+// API para filtrar todos o livros favoritados
 Route::post('/favoritos', [App\Http\Controllers\HomeController::class, 'favoritos']);
