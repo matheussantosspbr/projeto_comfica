@@ -19,7 +19,7 @@ docker-compose up -d
 
 cd app
 
-Casso a opção 1 não funcione, use a opção 2:
+Caso a opção 1 não funcione, use a opção 2:
 <!-- Casso a opção 1 não funcione, use a opção 2  -->
     Opção 1:
         php artisan migrate
