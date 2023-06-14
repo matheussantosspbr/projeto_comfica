@@ -7,5 +7,4 @@ docker-compose up -d
 cd app
 
 composer install
-
-php artisan serve
+    

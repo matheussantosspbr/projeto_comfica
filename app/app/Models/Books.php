@@ -2,29 +2,28 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class Books extends Authenticatable
+class Books extends Model
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array<int, string>
-     */
     protected $fillable = [
-        'name',
-        'email',
-        'password',
+        'id',
+        'title',
+        'description',
+        'favorite',
     ];
 
     public static function addBook($dados){
-        return DB::insert('insert into books (title, description, irl) values (?, ?, ?)', [$dados->title, $dados->description, $dados->url]);
+        return DB::insert('insert into books (title, description, url) values (?, ?, ?)', [$dados->title, $dados->description, $dados->url]);
     }
+
+    public static function favoriteBook($dados){
+        Books::where('id', $dados->id)->update(['favorite' => $dados->status]);
+    }
+
+    
 }
