@@ -4,7 +4,12 @@ git clone https://github.com/matheussantosspbr/projeto_comfica
 
 cd projeto_comfica/app
 
-Renomeei (.env.example) para (.env)
+Renomeei (.env.example) para (.env):
+    <!--  -->
+        Linux:
+            mv .env.example .env
+        Windowns:
+            ren .env.example .env
 
 composer install
 
@@ -14,7 +19,7 @@ docker-compose up -d
 
 cd app
 
- Casso a opção 1 não funcione, use a opção 2:
+Casso a opção 1 não funcione, use a opção 2:
 <!-- Casso a opção 1 não funcione, use a opção 2  -->
     Opção 1:
         php artisan migrate
@@ -27,3 +32,4 @@ cd app
 
 Acessar http://localhost/
     
+Para sair da maquina virtual (docker) aperte exit.
