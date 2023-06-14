@@ -2,11 +2,11 @@
 
 git clone https://github.com/matheussantosspbr/projeto_comfica
 
-cd projeto_comfica
-
-cd app
+cd projeto_comfica/app
 
 Renomeei (.env.example) para (.env)
+
+composer install
 
 cd ..
 
@@ -14,8 +14,7 @@ docker-compose up -d
 
 cd app
 
-composer install
-
+ Casso a opção 1 não funcione, use a opção 2:
 <!-- Casso a opção 1 não funcione, use a opção 2  -->
     Opção 1:
         php artisan migrate
